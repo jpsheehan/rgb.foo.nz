@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link id="icon" rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+	</head>
+	<body>
+		<script type="text/javascript">
+			(function(){
+				const DEFAULT_COLOUR = "#1a1a1a";
+
+				function getColourCode() {
+					const hash = location.hash;
+					if (!/^#[a-fA-F0-9]{3,6}$/.test(hash)) {
+						return null;
+					}
+					return hash;
+				}
+
+				function setBackgroundColour(colour) {
+					document.body.style.backgroundColor = colour;
+					document.title = colour;
+				}
+
+				function init() {
+					const colour = getColourCode();
+					if (colour) {
+						setBackgroundColour(colour.toLowerCase());
+					} else {
+						location.hash = DEFAULT_COLOUR;
+					}
+				}
+
+				window.addEventListener('hashchange', init);
+				init();
+			})();
+		</script>
+	</body>
+</html>
